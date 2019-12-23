@@ -1,4 +1,4 @@
-<%--
+<%@ page import="SpringDemo.Blog" %><%--
   Created by IntelliJ IDEA.
   User: Rajat
   Date: 22/12/2019
@@ -23,14 +23,16 @@
     </tr>
 
     <c:forEach var="tempBlogs" items="${userList}">
-        <c:url var="updateLink" value="/blog/showBlogForUpdate">
-         <c:param name="blogId" value="${tempBlogs.id}"/>
+        <c:url var="updateLink" value="/blog/showBlogForUpdate/${tempBlogs.id}">
+
         </c:url>
         <tr>
             <td> ${tempBlogs.id}</td>
             <td> ${tempBlogs.title}</td>
             <td> ${tempBlogs.content}</td>
             <td><a href="${updateLink}">Update</a>
+                |
+                Delete
             </td>
         </tr>
 

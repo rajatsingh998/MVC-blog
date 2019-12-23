@@ -39,15 +39,26 @@ public class BlogController {
         mv.setViewName("list-blogs");
         return mv;
     }
+    @RequestMapping(value = "/editConfirm",method = RequestMethod.POST)
+    public ModelAndView editConfirm(@ModelAttribute("blog") Blog blogModel) {
 
-    @GetMapping(value = "/showBlogForUpdate")
-    public String displayEditBlog(@RequestParam("blogId") int id, Model theModel){
+        ModelAndView modelAndView = new ModelAndView();
+        BlogService obj = new BlogService();
+
+        String result = obj.updateBlog(blogModel);
+        modelAndView.setViewName("BlogConfirmation");
+        modelAndView.addObject("processResult",result);
+        return modelAndView;
+    }
+
+    @RequestMapping (value = "/showBlogForUpdate/{id}")
+    public ModelAndView displayEditBlog(@PathVariable("id") int id){
         BlogService obj = new BlogService();
         Blog theBlog=obj.getBlogById(id);
-
-        theModel.addAttribute("blog",theBlog);
-
-        return"list-blogs";
+        ModelAndView mv=new ModelAndView();
+       mv.addObject("blog",theBlog);
+       mv.setViewName("updateblog");
+        return mv;
 
     }
 

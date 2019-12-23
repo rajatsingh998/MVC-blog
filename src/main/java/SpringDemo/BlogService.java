@@ -19,7 +19,9 @@ public class   BlogService {
     public  Blog getBlogById(int id) {
         Configuration configuration= new Configuration().configure().addAnnotatedClass(Blog.class);
         SessionFactory sessionFactory= configuration.buildSessionFactory();
-        Session session= sessionFactory.getCurrentSession();
+        Session session= sessionFactory.openSession();
+        session.beginTransaction();
+
         System.out.println("lets see");
 
         Blog theBlog=session.get(Blog.class, id);
@@ -44,9 +46,23 @@ public class   BlogService {
         SessionFactory sessionFactory= configuration.buildSessionFactory();
         Session session= sessionFactory.openSession();
         Transaction transaction= session.beginTransaction();
-        Query resultQuery=session.createQuery("from Blog");
+        Query resultQuery=session.createQuery("from Blog order by id");
         List<Blog> blogModelArrayList= ((org.hibernate.query.Query) resultQuery).list();
         return  blogModelArrayList;
+    }
+
+    public  String updateBlog(Blog theblog){
+        Configuration configuration= new Configuration().configure().addAnnotatedClass(Blog.class);
+        SessionFactory sessionFactory= configuration.buildSessionFactory();
+        Session session= sessionFactory.openSession();
+        Transaction transaction= session.beginTransaction();
+
+        Blog currentBlog=session.find(Blog.class, theblog.getId());
+        currentBlog.setContent(theblog.getContent());
+        currentBlog.setTitle(theblog.getTitle());
+        session.update(currentBlog);
+        transaction.commit();
+        return "update successfully";
     }
 
 
