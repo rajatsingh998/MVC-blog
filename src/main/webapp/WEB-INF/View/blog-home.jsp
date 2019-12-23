@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<form:form action="processForm" modelAttribute="blogger">
+<form:form action="createConfirm" method="POST" modelAttribute="BlogModel">
     Enter Title Name: <form:input path="title"/>
     <br><br>
     Enter Your Content: <form:input path="content"/>

@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="form/blogshow"> welcome to blogs</a>
+<a href="blog/create"> welcome to blogs</a>
 </body>
 </html>
