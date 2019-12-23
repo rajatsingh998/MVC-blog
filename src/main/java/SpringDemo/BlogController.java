@@ -62,6 +62,28 @@ public class BlogController {
 
     }
 
+    @RequestMapping (value = "/delete/{id}")
+    public ModelAndView deleteBlog(@PathVariable("id") int id){
+        BlogService obj = new BlogService();
+        Blog theBlog=obj.getBlogById(id);
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("blog",theBlog);
+        mv.setViewName("deleteConfirm");
+        return mv;
+
+    }
+    @RequestMapping(value = "/deleteOk",method = RequestMethod.POST)
+    public ModelAndView deleteFianl(@ModelAttribute("blog") Blog blogModel) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        BlogService obj = new BlogService();
+
+        String result = obj.deleteBlog(blogModel);
+        modelAndView.setViewName("BlogConfirmation");
+        modelAndView.addObject("processResult",result);
+        return modelAndView;
+    }
+
 //    @RequestMapping(value = "/editUser/{id}", method = RequestMethod.GET)
 //    public ModelAndView displayEditUserForm(@PathVariable int id) {
 //        ModelAndView mv = new ModelAndView("/editUser");

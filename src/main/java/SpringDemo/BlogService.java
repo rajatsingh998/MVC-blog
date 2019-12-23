@@ -21,9 +21,6 @@ public class   BlogService {
         SessionFactory sessionFactory= configuration.buildSessionFactory();
         Session session= sessionFactory.openSession();
         session.beginTransaction();
-
-        System.out.println("lets see");
-
         Blog theBlog=session.get(Blog.class, id);
         return theBlog;
     }
@@ -65,6 +62,17 @@ public class   BlogService {
         return "update successfully";
     }
 
+    public  String deleteBlog(Blog theblog){
+        Configuration configuration= new Configuration().configure().addAnnotatedClass(Blog.class);
+        SessionFactory sessionFactory= configuration.buildSessionFactory();
+        Session session= sessionFactory.openSession();
+        Transaction transaction= session.beginTransaction();
+
+        Blog currentBlog=session.find(Blog.class, theblog.getId());
+        session.remove(currentBlog);
+        transaction.commit();
+        return "delete successfully";
+    }
 
 
 

@@ -26,13 +26,17 @@
         <c:url var="updateLink" value="/blog/showBlogForUpdate/${tempBlogs.id}">
 
         </c:url>
+        <c:url var="deleteLink" value="/blog/delete/${tempBlogs.id}">
+
+        </c:url>
         <tr>
             <td> ${tempBlogs.id}</td>
             <td> ${tempBlogs.title}</td>
             <td> ${tempBlogs.content}</td>
             <td><a href="${updateLink}">Update</a>
                 |
-                Delete
+                <a href="${deleteLink}"
+                   onclick="if (!(confirm('Are You Sure'))) return false">Delete</a>
             </td>
         </tr>
 
