@@ -13,7 +13,9 @@
     <title>List og Blogs</title>
 </head>
 <body>
-<form:form action="saveCustomer" modelAttribute="blog" method="post">
+<form:form action="saveCustomer" modelAttribute="userList" method="post">
+
+  <a href="create">Add new Blog</a>
 <table>
     <tr>
         <th> ID</th>

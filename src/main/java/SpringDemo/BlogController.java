@@ -1,5 +1,8 @@
 package SpringDemo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,42 +12,53 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
+@Component
 @RequestMapping("/blog")
 public class BlogController {
+
     @RequestMapping(value = "/create",method = RequestMethod.GET)
+
     public String processBlog(Model theModel) {
-        Blog theBlog=new Blog();
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        Blog theBlog=context.getBean("blogObj",Blog.class);
         theModel.addAttribute("BlogModel",theBlog);
         return "blog-home";
 
     }
-
-    @RequestMapping(value = "/createConfirm",method = RequestMethod.POST)
-    public ModelAndView processBlog(@ModelAttribute("BlogModel") Blog blogModel) {
-
-        ModelAndView modelAndView = new ModelAndView();
-        BlogService obj = new BlogService();
-        String result = obj.addThis(blogModel);
-        modelAndView.setViewName("BlogConfirmation");
-        modelAndView.addObject("processResult",result);
-        return modelAndView;
-    }
     @RequestMapping(value = "/allBlog", method = RequestMethod.GET)
     public ModelAndView displayAllUser() {
         System.out.println("User Page Requested : All Users");
-        BlogService obj = new BlogService();
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj", BlogService.class);
         ModelAndView mv = new ModelAndView();
         List userList = obj.getBlogs();
         mv.addObject("userList", userList);
         mv.setViewName("list-blogs");
         return mv;
     }
+
+    @RequestMapping(value = "/createConfirm",method = RequestMethod.POST)
+    public ModelAndView processBlog(@ModelAttribute("BlogModel") Blog blogModel) {
+
+        ModelAndView modelAndView = new ModelAndView();
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj",BlogService.class);
+        String result = obj.addThis(blogModel);
+        modelAndView.setViewName("BlogConfirmation");
+        modelAndView.addObject("processResult",result);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/editConfirm",method = RequestMethod.POST)
     public ModelAndView editConfirm(@ModelAttribute("blog") Blog blogModel) {
 
         ModelAndView modelAndView = new ModelAndView();
-        BlogService obj = new BlogService();
-
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj",BlogService.class);
         String result = obj.updateBlog(blogModel);
         modelAndView.setViewName("BlogConfirmation");
         modelAndView.addObject("processResult",result);
@@ -53,7 +67,10 @@ public class BlogController {
 
     @RequestMapping (value = "/showBlogForUpdate/{id}")
     public ModelAndView displayEditBlog(@PathVariable("id") int id){
-        BlogService obj = new BlogService();
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj",BlogService.class);
+
         Blog theBlog=obj.getBlogById(id);
         ModelAndView mv=new ModelAndView();
        mv.addObject("blog",theBlog);
@@ -64,7 +81,9 @@ public class BlogController {
 
     @RequestMapping (value = "/delete/{id}")
     public ModelAndView deleteBlog(@PathVariable("id") int id){
-        BlogService obj = new BlogService();
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj",BlogService.class);
         Blog theBlog=obj.getBlogById(id);
         ModelAndView mv=new ModelAndView();
         mv.addObject("blog",theBlog);
@@ -74,7 +93,9 @@ public class BlogController {
     }
     @RequestMapping(value = "/showById/{id}")
     public ModelAndView showById(@PathVariable("id") int id){
-        BlogService obj = new BlogService();
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj",BlogService.class);
         Blog theBlog=obj.getBlogById(id);
         ModelAndView mv=new ModelAndView();
         mv.addObject("blog",theBlog);
@@ -86,8 +107,9 @@ public class BlogController {
     public ModelAndView deleteFianl(@ModelAttribute("blog") Blog blogModel) {
 
         ModelAndView modelAndView = new ModelAndView();
-        BlogService obj = new BlogService();
-
+        ClassPathXmlApplicationContext context=
+                new ClassPathXmlApplicationContext("applicationContext1.xml");
+        BlogService obj = context.getBean("blogServiceObj",BlogService.class);
         String result = obj.deleteBlog(blogModel);
         modelAndView.setViewName("BlogConfirmation");
         modelAndView.addObject("processResult",result);

@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="blog/create"> welcome to blogs</a>
+<% response.sendRedirect("blog/allBlog"); %>
+<%--<a href="blog/allBlog"> welcome to blogs</a>--%>
 </body>
 </html>

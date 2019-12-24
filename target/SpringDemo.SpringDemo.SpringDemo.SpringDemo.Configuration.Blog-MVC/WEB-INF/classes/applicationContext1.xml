@@ -25,6 +25,9 @@
     </bean>
     <bean id="blogObj" class="SpringDemo.Blog">
     </bean>
+
+<bean id="blogServiceObj" class="SpringDemo.BlogService">
+</bean>
 <!--    <bean id="blogService1" class="SpringDemo.BlogService1" abstract="true">-->
 <!--    </bean>-->
 
