@@ -29,9 +29,12 @@
         <c:url var="deleteLink" value="/blog/delete/${tempBlogs.id}">
 
         </c:url>
+        <c:url var="showBYId" value="/blog/showById/${tempBlogs.id}">
+
+        </c:url>
         <tr>
             <td> ${tempBlogs.id}</td>
-            <td> ${tempBlogs.title}</td>
+            <td> <a href="${showBYId}">${tempBlogs.title}</a></td>
             <td> ${tempBlogs.content}</td>
             <td><a href="${updateLink}">Update</a>
                 |

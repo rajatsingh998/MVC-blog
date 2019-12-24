@@ -2,26 +2,25 @@
 <%--
   Created by IntelliJ IDEA.
   User: Rajat
-  Date: 23/12/2019
-  Time: 16:22
+  Date: 24/12/2019
+  Time: 06:27
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>delete</title>
+    <title>Title</title>
 </head>
 <body>
-<form:form action="/BlogMVC_war_exploded/blog/deleteOk" method="POST" modelAttribute="blog">
+<form:form  modelAttribute="blog">
     <form:hidden path="id"></form:hidden>
 
-     Title Name: ${blog.title}
+    Title Name: ${blog.title}
     <br><br>
-      Content: ${blog.content}
+    Content: ${blog.content}
     <br><br>
 
-    <input type="submit" value="Delete"/>
+
 </form:form>
-
 </body>
 </html>

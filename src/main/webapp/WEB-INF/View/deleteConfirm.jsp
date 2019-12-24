@@ -15,12 +15,12 @@
 <form:form action="/BlogMVC_war_exploded/blog/deleteOk" method="POST" modelAttribute="blog">
     <form:hidden path="id"></form:hidden>
 
-    Enter Title Name: <form:textarea path="title" />
+     Title Name: ${blog.title}
     <br><br>
-    Enter Your Content: <form:textarea path="content"/>
+      Content: ${blog.content}
     <br><br>
 
-    <input type="submit" value="Update"/>
+    <input type="submit" value="Delete"/>
 </form:form>
 
 </body>

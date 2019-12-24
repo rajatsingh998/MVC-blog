@@ -72,6 +72,16 @@ public class BlogController {
         return mv;
 
     }
+    @RequestMapping(value = "/showById/{id}")
+    public ModelAndView showById(@PathVariable("id") int id){
+        BlogService obj = new BlogService();
+        Blog theBlog=obj.getBlogById(id);
+        ModelAndView mv=new ModelAndView();
+        mv.addObject("blog",theBlog);
+        mv.setViewName("showBlogById");
+        return mv;
+    }
+
     @RequestMapping(value = "/deleteOk",method = RequestMethod.POST)
     public ModelAndView deleteFianl(@ModelAttribute("blog") Blog blogModel) {
 
